@@ -3,7 +3,7 @@
 set orig_path=%PATH%
 set orig_vcd=%VECTORCAST_DIR%
 
-set VECTORCAST_DIR=c:\vcast\2020sp7
+set VECTORCAST_DIR=c:\vcast\2020sp1
 set path=%VECTORCAST_DIR%;%PATH%
 
 call cleanup.bat

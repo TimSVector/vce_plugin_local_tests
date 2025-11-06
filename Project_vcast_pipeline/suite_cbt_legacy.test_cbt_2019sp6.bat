@@ -3,12 +3,13 @@
 set orig_path=%PATH%
 set orig_vcd=%VECTORCAST_DIR%
 
-set VECTORCAST_DIR=c:\vcast\2020sp7
-set path=%VECTORCAST_DIR%;%PATH%
+set VECTORCAST_DIR=c:\vcast\2019
+set path=%VECTORCAST_DIR%;%path%
 
 call cleanup.bat
 
 pushd %WORKING_DIR%
+
 
 manage -p Project --create
 manage -p Project --level GNU_C_49/C_SUITE --group C --create
@@ -40,7 +41,8 @@ clicast -e ENV_COVER Cover Instrument STATEMENT
 manage -p Project --import ENV_COVER.vcp
 manage -p Project --group CPP --add ENV_COVER
 
-copy /Y ENV_COVER_system_tests.py %WORKING_DIR%\Project\python\ENV_COVER_system_tests.py
+copy /Y system_tests_2019.py %WORKING_DIR%\Project\python\ENV_COVER_system_tests.py
+
 
 :: Pipeline testing
 vpython vc_scripts/archive_extract_reports.py --archive
@@ -71,8 +73,7 @@ copy /Y source_b.orig source_b.c
 vpython vc_scripts/vcast_exec.py %WORKING_DIR%\Project.vcm --cobertura_extended --lcov --sonarqube
 
 popd
-
 set path=%orig_path%
 set VECTORCAST_DIR=%orig_vcd%
 
-echo --level campaign_jenkins_plugin/test_pipeline_jobs/suite_cbt_legacy/test_cbt_2020
+echo --level campaign_jenkins_plugin/test_pipeline_jobs/suite_cbt_legacy/test_cbt_2019
