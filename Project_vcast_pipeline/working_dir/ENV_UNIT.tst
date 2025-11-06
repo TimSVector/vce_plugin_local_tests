@@ -1,0 +1,43 @@
+-- VectorCAST 24 revision c03e92c (01/31/25)
+-- Test Case Script
+--
+-- Environment    : ENV_UNIT
+-- Unit(s) Under Test: foo
+--
+-- Script Features
+TEST.SCRIPT_FEATURE:C_DIRECT_ARRAY_INDEXING
+TEST.SCRIPT_FEATURE:CPP_CLASS_OBJECT_REVISION
+TEST.SCRIPT_FEATURE:MULTIPLE_UUT_SUPPORT
+TEST.SCRIPT_FEATURE:REMOVED_CL_PREFIX
+TEST.SCRIPT_FEATURE:MIXED_CASE_NAMES
+TEST.SCRIPT_FEATURE:STANDARD_SPACING_R2
+TEST.SCRIPT_FEATURE:OVERLOADED_CONST_SUPPORT
+TEST.SCRIPT_FEATURE:UNDERSCORE_NULLPTR
+TEST.SCRIPT_FEATURE:FULL_PARAMETER_TYPES
+TEST.SCRIPT_FEATURE:STRUCT_DTOR_ADDS_POINTER
+TEST.SCRIPT_FEATURE:STRUCT_FIELD_CTOR_ADDS_POINTER
+TEST.SCRIPT_FEATURE:STRUCT_BASE_CTOR_ADDS_POINTER
+TEST.SCRIPT_FEATURE:STATIC_HEADER_FUNCS_IN_UUTS
+TEST.SCRIPT_FEATURE:VCAST_MAIN_NOT_RENAMED
+--
+
+-- Unit: foo
+
+-- Subprogram: CAS::CAS_Elevation_Record::CAS_Elevation_Record()
+
+-- Test Case: CAS::CAS_Elevation_Record::CAS_Elevation_Record().001
+TEST.UNIT:foo
+TEST.SUBPROGRAM:CAS::CAS_Elevation_Record::CAS_Elevation_Record()
+TEST.NEW
+TEST.NAME:CAS::CAS_Elevation_Record::CAS_Elevation_Record().001
+TEST.END
+
+-- Subprogram: CAS::CAS_Elevation_Record::CAS_Elevation_Record(const CAS::CAS_Elevation_Record&&)
+
+-- Test Case: CAS::CAS_Elevation_Record::CAS_Elevation_Record(constCAS::CAS_Elevation_Record&&).001
+TEST.UNIT:foo
+TEST.SUBPROGRAM:CAS::CAS_Elevation_Record::CAS_Elevation_Record(const CAS::CAS_Elevation_Record&&)
+TEST.NEW
+TEST.NAME:CAS::CAS_Elevation_Record::CAS_Elevation_Record(constCAS::CAS_Elevation_Record&&).001
+TEST.VALUE:foo.CAS::CAS_Elevation_Record::CAS_Elevation_Record(const CAS::CAS_Elevation_Record&&).VCAST_PARAM_1.CAS::CAS_Elevation_Record.<<constructor>>.CAS_Elevation_Record().<<call>>:0
+TEST.END
