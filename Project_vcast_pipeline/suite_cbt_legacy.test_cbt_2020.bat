@@ -70,6 +70,8 @@ copy /Y source_b.orig source_b.c
 
 vpython vc_scripts/vcast_exec.py %WORKING_DIR%\Project.vcm --cobertura_extended --lcov --sonarqube
 
+:END
+
 popd
 
 set path=%orig_path%
