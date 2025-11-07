@@ -1,9 +1,6 @@
+setlocal
 
-
-set orig_path=%PATH%
-set orig_vcd=%VECTORCAST_DIR%
-
-set VECTORCAST_DIR=c:\vcast\2020sp7
+set VECTORCAST_DIR=c:\vcast\2024sp6
 set path=%VECTORCAST_DIR%;%PATH%
 
 call cleanup.bat
@@ -11,46 +8,47 @@ call cleanup.bat
 pushd %WORKING_DIR%
 
 manage -p Project --create
-manage -p Project --level GNU_C_49/C_SUITE --group C --create
-manage -p Project --level GNAT/ADA_SUITE --group ADA --create
-manage -p Project --level GNU_CPP_49/CPP_SUITE --group CPP --create
+manage -p Project --level GNU_C_49/C_SUITE --create
+manage -p Project --level GNAT/ADA_SUITE --create
+manage -p Project --level GNU_CPP_49/CPP_SUITE --create
 clicast -lc TEMplate GNU_C_49
 clicast option VCAST_NO_LONG_DOUBLE TRUE
 clicast -lc environment build ENV_MIGRATED_C.env
 clicast -lc -e ENV_MIGRATED_C TOols Script Run ENV_MIGRATED_C.tst
 manage -p Project --import ENV_MIGRATED_C.vce -lc
-manage -p Project --group C --add ENV_MIGRATED_C
-manage -p Project --level GNU_C_49/C_SUITE --group C -e ENV_MIGRATED_C --migrate
+manage -p Project --level GNU_C_49/C_SUITE --add ENV_MIGRATED_C
+manage -p Project --level GNU_C_49/C_SUITE -e ENV_MIGRATED_C --migrate
 manage -p Project --level GNU_C_49/C_SUITE/ENV_MIGRATED_C --build --workspace=%WORKING_DIR%\Project\build
 manage -p Project --level GNU_C_49/C_SUITE/ENV_MIGRATED_C --apply-changes --force --verbose
-manage -p Project --level GNU_C_49/C_SUITE --group C -e ENV_MIGRATED_C --clean
+manage -p Project --level GNU_C_49/C_SUITE -e ENV_MIGRATED_C --clean
 gcc -c unit.adb
 clicast -lada options COMPILATION_SYSTEM GNAT
 clicast -lada environment build ENV_MONITORED_ADA.env
 clicast -lada -e ENV_MONITORED_ADA TOols Script Run ENV_MONITORED_ADA.tst
 manage -p Project --import ENV_MONITORED_ADA.vce -lada
-manage -p Project --group ADA --add ENV_MONITORED_ADA
+manage -p Project --level GNAT/ADA_SUITE --add ENV_MONITORED_ADA
 manage -p Project --group ALL --list
 clicast Cover Environment Create ENV_COVER
 clicast TEMplate GNU_CPP_49
 clicast option VCAST_NO_LONG_DOUBLE TRUE
-clicast -e ENV_COVER Cover Source Add source_a.c
-clicast -e ENV_COVER Cover Source Add source_b.c
+clicast -e ENV_COVER Cover Base_dir Add ROOT %WORKING_DIR%
+clicast -e ENV_COVER Cover Base_dir ALlowlist ROOT source_a.c
+clicast -e ENV_COVER Cover Base_dir ALlowlist ROOT source_b.c
+clicast -e ENV_COVER Cover Base_dir update
 clicast -e ENV_COVER Cover Instrument STATEMENT
 manage -p Project --import ENV_COVER.vcp
-manage -p Project --group CPP --add ENV_COVER
-
-copy /Y ENV_COVER_system_tests.py %WORKING_DIR%\Project\python\ENV_COVER_system_tests.py
+manage -p Project --level GNU_CPP_49/CPP_SUITE -e ENV_COVER --add ENV_COVER
+copy /Y ENV_COVER_system_tests.py %WORKING_DIR%\Project\python\ENV_COVER_system_tests.py 
 
 :: Pipeline testing
 vpython vc_scripts/archive_extract_reports.py --archive
-vpython vc_scripts/getjobs.py %WORKING_DIR%\Project.vcm --type
 vpython vc_scripts/managewait.py --wait_time 30 --wait_loops 1 --command_line "--project "%WORKING_DIR%\Project.vcm"  --config=VCAST_STRICT_TEST_CASE_IMPORT=TRUE"
 vpython vc_scripts/managewait.py --wait_time 30 --wait_loops 1 --command_line "--project "%WORKING_DIR%\Project.vcm"  --status"
 vpython vc_scripts/managewait.py --wait_time 30 --wait_loops 1 --command_line "--project "%WORKING_DIR%\Project.vcm"  --force --release-locks"
 vpython vc_scripts/managewait.py --wait_time 30 --wait_loops 1 --command_line "--project "%WORKING_DIR%\Project.vcm"  --config VCAST_CUSTOM_REPORT_FORMAT=HTML"
+vpython vc_scripts/getjobs.py %WORKING_DIR%\Project.vcm --type
 vpython vc_scripts/managewait.py --wait_time 30 --wait_loops 1 --command_line "--project "%WORKING_DIR%\Project.vcm"  --level GNU_CPP_49/CPP_SUITE -e ENV_COVER --build-execute --incremental --output GNU_CPP_49_CPP_SUITE_ENV_COVER_rebuild.html" > unstashed_build.log
-vpython vc_scripts/managewait.py --wait_time 30 --wait_loops 1 --command_line "--project "%WORKING_DIR%\Project.vcm"  --level GNAT/ADA_SUITE -e ENV_MONITORED_ADA --build-execute --incremental --output GNAT_ADA_SUITE_ENV_MONITORED_ADA_rebuild.html" >> unstashed_build.log
+vpython vc_scripts/managewait.py --wait_time 30 --wait_loops 1 --command_line "--project "%WORKING_DIR%\Project.vcm"  --level GNAT/ADA_SUITE -e ENV_MONITORED_ADA --build-execute --incremental --output GNU_C_49_C_SUITE_ENV_MIGRATED_C_rebuild.html" >> unstashed_build.log
 vpython vc_scripts/managewait.py --wait_time 30 --wait_loops 1 --command_line "--project "%WORKING_DIR%\Project.vcm"  --level GNU_C_49/C_SUITE -e ENV_MIGRATED_C --build-execute --incremental --output GNU_C_49_C_SUITE_ENV_MIGRATED_C_rebuild.html" >> unstashed_build.log
 vpython vc_scripts/generate-results.py  %WORKING_DIR%\Project.vcm --wait_time 30 --wait_loops 1 --junit --buildlog unstashed_build.log 
 vpython vc_scripts/parallel_full_reports.py  %WORKING_DIR%\Project.vcm --jobs max
@@ -70,11 +68,8 @@ copy /Y source_b.orig source_b.c
 
 vpython vc_scripts/vcast_exec.py %WORKING_DIR%\Project.vcm --cobertura_extended --lcov --sonarqube
 
-:END
-
 popd
+echo --level campaign_jenkins_plugin/test_pipeline_jobs/suite_cbt_legacy/test_cbt_2023
 
-set path=%orig_path%
-set VECTORCAST_DIR=%orig_vcd%
 
-echo --level campaign_jenkins_plugin/test_pipeline_jobs/suite_cbt_legacy/test_cbt_2020
+endlocal

@@ -3,7 +3,7 @@
 set orig_path=%PATH%
 set orig_vcd=%VECTORCAST_DIR%
 
-set VECTORCAST_DIR=c:\vcast\2020sp7
+set VECTORCAST_DIR=c:\vcast\2020sp1
 set path=%VECTORCAST_DIR%;%PATH%
 
 call cleanup.bat
@@ -69,8 +69,6 @@ copy /Y source_a.orig source_a.c
 copy /Y source_b.orig source_b.c
 
 vpython vc_scripts/vcast_exec.py %WORKING_DIR%\Project.vcm --cobertura_extended --lcov --sonarqube
-
-:END
 
 popd
 
