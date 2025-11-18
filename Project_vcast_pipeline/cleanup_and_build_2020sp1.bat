@@ -8,6 +8,7 @@ git clean -fxd
 
 cd Project_vcast_pipeline\working_dir
 
+del foo.cpp /Q
 echo Starting build of building process for Project.vcm
 
 manage -p Project --create
