@@ -1,15 +1,20 @@
+@echo off
+
 setlocal
 set VECTORCAST_DIR=c:\vcast\2020sp1
 set PATH=%VECTORCAST_DIR%;d:\vector\tools\gnat\2021\bin;%VECTORCAST_DIR%\mingw\bin;%PATH%
 
-cd Project_vcast_pipeline
+IF EXIST "%WORKSPACE%\proj.bld" (
+    echo Pre-build already done -0 skipping.
+    goto END
+)
 
 git reset --hard
 git clean -fxd
 
 cd working_dir
 
-echo "starting build of  building process for Project.vcm"
+echo Starting build of building process for Project.vcm
 
 manage -p Project --create
 manage -p Project --level GNU_C_49/C_SUITE --group C --create
@@ -41,9 +46,10 @@ clicast -e ENV_COVER Cover Instrument STATEMENT
 manage -p Project --import ENV_COVER.vcp
 manage -p Project --group CPP --add ENV_COVER
 
-popd
-popd
+cd %WORKSPACE%
 
 manage -p Project_vcast_pipeline\working_dir\Project --full-status
 
+:SKIP_TEST
+echo [%DATE% %TIME%] Tests Already Exists > "%WORKSPACE%\proj.bld"
 endlocal
