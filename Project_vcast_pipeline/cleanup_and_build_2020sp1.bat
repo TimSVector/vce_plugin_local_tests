@@ -1,4 +1,6 @@
-set VECTORCAST_DIR=c:\vcast\2020sp1
+
+
+set VECTORCAST_DIR=%VCAST_DIRECTORY%
 set PATH=%VECTORCAST_DIR%;d:\vector\tools\gnat\2021\bin;%VECTORCAST_DIR%\mingw\bin;%PATH%
 
 git reset --hard
