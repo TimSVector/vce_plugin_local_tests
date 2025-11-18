@@ -24,11 +24,14 @@ del *png
 del *.log
 del *.tar
 del unit_test*.txt
+del *.ali *.o
+
+rmdir /s /q vc_scripts
 
 :: Prepare for testing
 if not exist vc_scripts (
     mkdir vc_scripts
-    xcopy /E /S /Y /I %VCAST_VC_SCRIPTS%\*.* %WORKSPACE%\vc_scripts 
+    xcopy /E /S /Y /I /Q %VCAST_VC_SCRIPTS%\*.* %WORKSPACE%\vc_scripts 
 )
 
 

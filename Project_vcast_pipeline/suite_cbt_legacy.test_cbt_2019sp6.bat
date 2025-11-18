@@ -22,7 +22,7 @@ clicast -lc -e ENV_MIGRATED_C TOols Script Run ENV_MIGRATED_C.tst
 manage -p Project --import ENV_MIGRATED_C.vce -lc
 manage -p Project --group C --add ENV_MIGRATED_C
 manage -p Project --level GNU_C_49/C_SUITE --group C -e ENV_MIGRATED_C --migrate
-manage -p Project --level GNU_C_49/C_SUITE/ENV_MIGRATED_C --build --workspace=%WORKING_DIR%\Project\build
+manage -p Project --level GNU_C_49/C_SUITE/ENV_MIGRATED_C --build
 manage -p Project --level GNU_C_49/C_SUITE/ENV_MIGRATED_C --apply-changes --force --verbose
 manage -p Project --level GNU_C_49/C_SUITE --group C -e ENV_MIGRATED_C --clean
 gcc -c unit.adb
@@ -43,6 +43,8 @@ manage -p Project --group CPP --add ENV_COVER
 
 copy /Y system_tests_2019.py %WORKING_DIR%\Project\python\ENV_COVER_system_tests.py
 
+manage -p Project --clean
+manage -p Project --full-status
 
 :: Pipeline testing
 vpython vc_scripts/archive_extract_reports.py --archive
