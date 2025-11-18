@@ -32,13 +32,16 @@ NOTE: When setting up path strings on windows, make sure that you
 class SystemTestsConfiguration(object):
 
     def __init__(self):
+        currDir = os.getenv("WORKSPACE","")
+        working_dir = os.path.join(currDir,"Project_vcast_pipeline/working_dir")
+
         # These are the environment's variables for spawned processes
         # For example: self.environmentVariables = {}
         self.environmentVariables = {}
 
         # This is the path to where the build or make command should be executed
         # For example: self.locationWhereWeRunMake = r'd:\vector\sandbox\jenkins\working_dir'
-        self.locationWhereWeRunMake = r'd:\vector\sandbox\jenkins\working_dir'
+        self.locationWhereWeRunMake = working_dir
 
         # This is the top level make command needed to build the application
         # For example: self.topLevelMakeCommand = 'make'
@@ -46,7 +49,7 @@ class SystemTestsConfiguration(object):
 
         # This is the location where we should run the tests.
         # For example: self.locationWhereWeRunTests = r'd:\vector\sandbox\jenkins\working_dir'
-        self.locationWhereWeRunTests = r'd:\vector\sandbox\jenkins\working_dir'
+        self.locationWhereWeRunTests = working_dir
 
         # This is the name of the test application to be invoked when running a test
         # For example: self.nameOfTestExecutable = 'c_executable'
