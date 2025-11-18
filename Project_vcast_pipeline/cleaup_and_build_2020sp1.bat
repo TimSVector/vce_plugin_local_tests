@@ -1,39 +1,16 @@
 setlocal
-set VECTORCAST_DIR=c:\\vcast\\2020sp1
-set PATH=%VECTORCAST_DIR%;d:\\vector\\tools\\gnat\\2021\\bin;%VECTORCAST_DIR%\\mingw\\bin;%PATH%
+set VECTORCAST_DIR=c:\vcast\2020sp1
+set PATH=%VECTORCAST_DIR%;d:\vector\tools\gnat\2021\bin;%VECTORCAST_DIR%\mingw\bin;%PATH%
 
+cd Project_vcast_pipeline
 
-rmdir /S /Q xml_data 
-rmdir /S /Q xml_data_orig /S /Q
-rmdir /S /Q xml_data_orig1 /S /Q
-rmdir /S /Q xml_data_orig2 /S /Q
-rmdir /S /Q execution /S /Q
-rmdir /S /Q management /S /Q
-rmdir /S /Q rebuild_reports /S /Q
-del /Q *.html 
-del /Q *.tmp 
-del /Q *.css 
-del /Q *.png 
-del /Q *.log 
-del /Q *.tar 
-del /Q unit_test*.txt 
+git reset --hard
+git clean -fxd
 
+cd working_dir
 
-pushd Project_vcast_pipeline\\working_dir
+echo "starting build of  building process for Project.vcm"
 
-del /Q *.ali *.o *.vc* *.qik  
-
-rmdir /S /Q ENV_UNIT 
-rmdir /S /Q ENV_COVER
-rmdir /S /Q ENV_MIGRATED_C
-rmdir /S /Q ENV_MONITORED_ADA 
-rmdir /S /Q ENV_MIGRATED_COVER
-
-rmdir /S /Q Project
-
-vpython %VECTORCAST_DIR%\python\vector\apps\AutomationController\UnInstrument.py
-
-echo "starting build of 
 manage -p Project --create
 manage -p Project --level GNU_C_49/C_SUITE --group C --create
 manage -p Project --level GNAT/ADA_SUITE --group ADA --create
@@ -45,7 +22,7 @@ clicast -lc -e ENV_MIGRATED_C TOols Script Run ENV_MIGRATED_C.tst
 manage -p Project --import ENV_MIGRATED_C.vce -lc
 manage -p Project --group C --add ENV_MIGRATED_C
 manage -p Project --level GNU_C_49/C_SUITE --group C -e ENV_MIGRATED_C --migrate
-manage -p Project --level GNU_C_49/C_SUITE/ENV_MIGRATED_C --build --workspace=Project\\build
+manage -p Project --level GNU_C_49/C_SUITE/ENV_MIGRATED_C --build --workspace=Project\build
 manage -p Project --level GNU_C_49/C_SUITE/ENV_MIGRATED_C --apply-changes --force --verbose
 manage -p Project --level GNU_C_49/C_SUITE --group C -e ENV_MIGRATED_C --clean
 gcc -c unit.adb
@@ -65,7 +42,8 @@ manage -p Project --import ENV_COVER.vcp
 manage -p Project --group CPP --add ENV_COVER
 
 popd
+popd
 
-manage -p Project_vcast_pipeline\\working_dir\\Project --full-status
+manage -p Project_vcast_pipeline\working_dir\Project --full-status
 
 endlocal
