@@ -40,6 +40,8 @@ clicast -e ENV_COVER Cover Instrument STATEMENT
 manage -p Project --import ENV_COVER.vcp
 manage -p Project --group CPP --add ENV_COVER
 
+copy /Y ENV_COVER_system_tests.py Project\python\ENV_COVER_system_tests.py
+
 cd ..\..
 
 manage -p Project_vcast_pipeline\working_dir\Project --full-status
