@@ -41,6 +41,8 @@ clicast -e ENV_COVER Cover Instrument STATEMENT
 manage -p Project --import ENV_COVER.vcp
 manage -p Project --group CPP --add ENV_COVER
 
+manage -p Project_vcast_pipeline\working_dir\Project --status
+
 if "%VCAST_DIRECTORY%"=="2020sp1" (
     copy /Y ENV_COVER_system_tests_2020sp1.py Project\python\ENV_COVER_system_tests.py
 
@@ -50,11 +52,16 @@ if "%VCAST_DIRECTORY%"=="2020sp1" (
 ) else if "%VCAST_DIRECTORY%"=="2018sp5" (
     copy /Y system_tests.py Project\python\system_tests.py
 
+) else if "%VCAST_DIRECTORY%"=="2019" (
+    copy /Y system_tests_19.py Project\python\ENV_COVER_system_tests.py
+
+) else if "%VCAST_DIRECTORY%"=="2019sp6" (
+    copy /Y system_tests.py Project\python\ENV_COVER_system_tests.py
+
 ) else (
     copy /Y ENV_COVER_system_tests.py Project\python\ENV_COVER_system_tests.py
 )
 
-
+manage -p Project_vcast_pipeline\working_dir\Project --full-status
 cd ..\..
 
-manage -p Project_vcast_pipeline\working_dir\Project --full-status
