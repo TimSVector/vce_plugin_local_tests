@@ -1,4 +1,4 @@
-TARGET = c_executable
+TARGET = c_executable.exe
 LIBS = -lm
 CC = gcc
 CFLAGS = -g -Wall
@@ -22,6 +22,6 @@ $(TARGET): $(OBJECTS)
 	$(CC) $(OBJECTS) ENV_COVER/c_cover_io.o -Wall $(LIBS) -o $@
 
 clean:
-	-rm -f *.o
-	-rm -f ENV_COVER/*.o
-	-rm -f $(TARGET)
+	-del *.o
+	-del ENV_COVER/*.o
+	-del $(TARGET)
