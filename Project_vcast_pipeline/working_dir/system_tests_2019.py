@@ -28,12 +28,16 @@ NOTE: When setting up path strings on windows, make sure that you
 
 class SystemTestsConfiguration(object):
     def __init__(self):
+        currDir = os.getenv("WORKSPACE",os.getcwd())
+        currDir = currDir.split("@",1)[0]
+        working_dir = os.path.join(currDir,"Project_vcast_pipeline/working_dir")
+
         # Set the environment's variables for spawned processes
         self.environmentVariables = {'PATH': os.pathsep.join([r'C:/VCAST/2018sp5/MinGW/bin', os.environ['PATH']])}
 
         # This is the path to where the build or make command should be executed
         # For example: self.locationWhereWeRunMake = r'd:\vector\sandbox\jenkins\working_dir'
-        self.locationWhereWeRunMake = r'd:\vector\sandbox\jenkins\working_dir'
+        self.locationWhereWeRunMake = working_dir
 
         # This is the top level make command needed to build the application
         # For example: self.topLevelMakeCommand = 'make'
@@ -41,11 +45,11 @@ class SystemTestsConfiguration(object):
 
         # This is the location where we should run the tests.
         # For example: self.locationWhereWeRunTests = r'd:\vector\sandbox\jenkins\working_dir'
-        self.locationWhereWeRunTests = r'd:\vector\sandbox\jenkins\working_dir'
+        self.locationWhereWeRunTests = working_dir
 
         # This is the name of the test application to be invoked when running a test
-        # For example: self.nameOfTestExecutable = 'c_executable'
-        self.nameOfTestExecutable = 'c_executable'
+        # For example: self.nameOfTestExecutable = 'c_executable.exe'
+        self.nameOfTestExecutable = 'c_executable.exe'
 
         # List of TestCase to run against the instrumented executable
         # For example: self.masterListOfTestCases = [TestCase('source_a'), TestCase('source_b')]

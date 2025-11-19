@@ -43,8 +43,8 @@ class SystemTestsConfiguration(object):
         self.locationWhereWeRunTests = working_dir
 
         # This is the name of the test application to be invoked when running a test
-        # For example: self.nameOfTestExecutable = 'c_executable'
-        self.nameOfTestExecutable = 'c_executable'
+        # For example: self.nameOfTestExecutable = 'c_executable.exe'
+        self.nameOfTestExecutable = 'c_executable.exe'
 
         # List of TestCase to run against the instrumented executable
         # For example: self.masterListOfTestCases = [TestCase('source_a'), TestCase('source_b')]
