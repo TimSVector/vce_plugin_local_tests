@@ -10,16 +10,16 @@ all: default
 
 OBJECTS = $(patsubst %.c, %_cfile.o, $(wildcard *.c))
 
-ENV_COVER/c_cover_io.o: ENV_COVER\c_cover_io.c ENV_COVER\vcast_c_options.h
+ENV_COVER\c_cover_io.o: ENV_COVER\c_cover_io.c ENV_COVER\vcast_c_options.h
 	$(CC) $(CFLAGS) -IENV_COVER -c $< -o $@
 
-%_cfile.o: %.c ENV_COVER/c_cover_io.o
+%_cfile.o: %.c ENV_COVER\c_cover_io.o
 	$(CC) $(CFLAGS) -I. -IENV_COVER -c $< -o $@
 
 .PRECIOUS: $(TARGET) $(OBJECTS)
 
 $(TARGET): $(OBJECTS)
-	$(CC) $(OBJECTS) ENV_COVER/c_cover_io.o -Wall $(LIBS) -o $@
+	$(CC) $(OBJECTS) ENV_COVER\c_cover_io.o -Wall $(LIBS) -o $@
 
 clean:
 	-del *.o
