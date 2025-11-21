@@ -25,7 +25,9 @@ def VC_maxParallel = 0
 def VC_useOneCheckoutDir = true
 def VC_useCILicense = ""
 def VC_useCBT = "--incremental"
-def VC_useCoveragePlugin = true
+
+def VC_useCoveragePlugin = (params.VCAST_DIRECTORY[0..3] as int) > 2021
+
 def VC_createdWithVersion = '0.79-SNAPSHOT (private-8245e6ee-vaprti)'
 def VC_usePCLintPlus = false
 def VC_pclpCommand = ''
