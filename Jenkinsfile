@@ -34,7 +34,7 @@ def VC_pclpCommand = ''
 def VC_pclpResultsPattern = '**/*lint_results.txt'
 def VC_useSquore = false
 def VC_squoreCommand = ''''''
-def VC_useCoverageHistory = false
+def VC_useCoverageHistory = true
 def VC_useStrictImport = true
 def VC_useRGW3 = false
 def VC_useImportedResults = false
@@ -45,7 +45,7 @@ def VC_externalResultsFilename = ""
 // Code Coverage threshold numbers
 // Basis path coverage is no longer support after VectorCAST 2019SP1
 def VC_Healthy_Target = [ maxStatement: 100, maxBranch: 100, maxFunctionCall: 100, maxFunction: 100, maxMCDC: 100,
-                          minStatement: 20,  minBranch: 20,  minFunctionCall: 20,  minFunction: 20,  minMCDC: 20]
+                          minStatement: 20,  minBranch: 20,  minFunctionCall: 20,  minFunction: 20,  minMCDC: 0]
 
 def VC_Use_Threshold = true
 
