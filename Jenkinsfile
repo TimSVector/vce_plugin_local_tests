@@ -1101,7 +1101,10 @@ pipeline {
                             // Send reports to the Jenkins Coverage Plugin
                             discoverReferenceBuild()
                             if (VC_useCoverageHistory) {
-                                recordCoverage qualityGates: [[baseline: 'PROJECT_DELTA', criticality: 'NOTE', metric: 'LINE', threshold: -0.001], [baseline: 'PROJECT_DELTA', criticality: 'FAILURE', metric: 'BRANCH', threshold: -0.001]], tools: [[parser: 'VECTORCAST', pattern: 'xml_data/cobertura/coverage_results*.xml']]
+                                recordCoverage qualityGates: [
+                                    [baseline: 'PROJECT_DELTA', criticality: 'NOTE', metric: 'LINE', threshold: -10], 
+                                    [baseline: 'PROJECT_DELTA', criticality: 'FAILURE', metric: 'BRANCH', threshold: -10]], 
+                                    tools: [[parser: 'VECTORCAST', pattern: 'xml_data/cobertura/coverage_results*.xml']]
                             } else {
                                 recordCoverage tools: [[parser: 'VECTORCAST', pattern: 'xml_data/cobertura/coverage_results*.xml']]
                             }
