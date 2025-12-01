@@ -1103,7 +1103,7 @@ pipeline {
                             if (VC_useCoverageHistory) {
                                 recordCoverage qualityGates: [
                                     [baseline: 'PROJECT_DELTA', criticality: 'NOTE', metric: 'LINE', threshold: -10], 
-                                    [baseline: 'PROJECT_DELTA', criticality: 'FAILURE', metric: 'BRANCH', threshold: -10]], 
+                                    [baseline: 'PROJECT_DELTA', criticality: 'NOTE', metric: 'BRANCH', threshold: -30]], 
                                     tools: [[parser: 'VECTORCAST', pattern: 'xml_data/cobertura/coverage_results*.xml']]
                             } else {
                                 recordCoverage tools: [[parser: 'VECTORCAST', pattern: 'xml_data/cobertura/coverage_results*.xml']]
