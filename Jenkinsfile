@@ -1258,6 +1258,33 @@ pipeline {
             }
         }
 
+        stage('Validate XML files') {
+            steps {
+                script {
+                    
+                    if (VC_useCoveragePlugin) {
+                        def files = findFiles(glob: 'xml_data/**/*.xml')
+
+                        echo "Found ${files.size()} XML files"
+                        files.each { f -> echo " - ${f.path}" }
+
+                        if (files.size() < 5) {
+                            error "Expected 5 XML output files, but found ${files.size()}!"
+                        }
+                    } else {
+                        def files = findFiles(glob: 'xml_data/*_*.xml')
+
+                        echo "Found ${files.size()} XML files"
+                        files.each { f -> echo " - ${f.path}" }
+
+                        if (files.size() < 6) {
+                            error "Expected 6 XML output files, but found ${files.size()}!"
+                        }
+                    }
+                }
+            }
+        }
+
         // Stage for additional tools from Vector
         // Currently supporting PC Lint Plus and Squore
         stage('Additional Tools') {
