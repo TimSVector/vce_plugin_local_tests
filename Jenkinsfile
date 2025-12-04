@@ -37,8 +37,8 @@ def VC_squoreCommand = ''''''
 def VC_useCoverageHistory = true
 def VC_useStrictImport = true
 def VC_useRGW3 = false
-def VC_useImportedResults = false
-def VC_useLocalImportedResults = false
+def VC_useImportedResults = true
+def VC_useLocalImportedResults = true
 def VC_useExternalImportedResults = false
 def VC_externalResultsFilename = ""
 
