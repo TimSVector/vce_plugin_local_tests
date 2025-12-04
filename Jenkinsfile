@@ -1268,7 +1268,7 @@ pipeline {
                         echo "Found ${files.size()} XML files"
                         files.each { f -> echo " - ${f.path}" }
 
-                        if (files.size() < 5) {
+                        if (files.size() != 5) {
                             error "Expected 5 XML output files, but found ${files.size()}!"
                         }
                     } else {
@@ -1277,7 +1277,7 @@ pipeline {
                         echo "Found ${files.size()} XML files"
                         files.each { f -> echo " - ${f.path}" }
 
-                        if (files.size() < 6) {
+                        if (files.size() != 6) {
                             error "Expected 6 XML output files, but found ${files.size()}!"
                         }
                     }
