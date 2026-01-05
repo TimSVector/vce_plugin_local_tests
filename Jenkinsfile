@@ -1065,6 +1065,7 @@ pipeline {
 
                         if (VC_useCoveragePlugin) {
                             buildLogText += runCommands("""_VECTORCAST_DIR/vpython  "${env.WORKSPACE}"/vc_scripts/cobertura.py --extended ${VC_Manage_Project}""", VC_EnvSetup, VC_useCILicense)
+                            buildLogText += runCommands("""_VECTORCAST_DIR/vpython  "${env.WORKSPACE}"/vc_scripts/vcast_exec.py ${VC_Manage_Project}  --utfull --tcmr --fullstatus --aggregate --metrics""", VC_EnvSetup, VC_useCILicense)
                         }
 
                         cmds =  """
