@@ -6,7 +6,7 @@ set PATH=%VECTORCAST_DIR%;d:\vector\tools\gnat\2021\bin;%VECTORCAST_DIR%\mingw\b
 git reset --hard
 git clean -fxd
 
-cd Project_vcast_pipeline\working_dir
+pushd Project_vcast_pipeline\working_dir
 
 del foo.cpp /Q
 echo Starting build of building process for Project.vcm
@@ -41,6 +41,8 @@ clicast -e ENV_COVER Cover Instrument STATEMENT
 manage -p Project --import ENV_COVER.vcp
 manage -p Project --group CPP --add ENV_COVER
 
+popd
+
 manage -p Project_vcast_pipeline\working_dir\Project --status
 
 if "%VCAST_DIRECTORY%"=="2020sp1" (
@@ -63,5 +65,4 @@ if "%VCAST_DIRECTORY%"=="2020sp1" (
 )
 
 manage -p Project_vcast_pipeline\working_dir\Project --full-status
-cd ..\..
 
