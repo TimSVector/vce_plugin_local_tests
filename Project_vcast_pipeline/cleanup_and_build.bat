@@ -40,6 +40,7 @@ clicast -e ENV_COVER Cover Source Add source_b.c
 clicast -e ENV_COVER Cover Instrument STATEMENT
 manage -p Project --import ENV_COVER.vcp
 manage -p Project --group CPP --add ENV_COVER
+manage -p Project --environment ENV_COVER --apply-instrumentation=BUILD
 
 manage -p Project --status
 
