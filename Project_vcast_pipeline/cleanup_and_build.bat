@@ -43,6 +43,7 @@ manage -p Project --group CPP --add ENV_COVER
 manage -p Project --environment ENV_COVER --apply-instrumentation=BUILD
 
 manage -p Project --status
+manage -p Project --config=VCAST_COVERAGE_SOURCE_FILE_PERSPECTIVE=FALSE
 
 if "%VCAST_DIRECTORY%"=="2020sp1" (
     copy /Y ENV_COVER_system_tests_2020sp1.py Project\python\ENV_COVER_system_tests.py
