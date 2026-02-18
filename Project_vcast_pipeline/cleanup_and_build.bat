@@ -66,6 +66,16 @@ if "%VCAST_DIRECTORY%"=="2020sp1" (
 
 popd
 
+setlocal EnableDelayedExpansion
+
+if defined VCAST_SHARED_DIR (
+  set "SHARED_DIR=!VCAST_SHARED_DIR:~12!"
+  set "SHARED_DIR=!SHARED_DIR:/=\%!  
+  rmdir /S /Q !SHARED_DIR! > null 2>&1
+  mkdir !SHARED_DIR!
+)
+endlocal
+
 
 manage -p Project_vcast_pipeline\working_dir\Project --full-status
 
