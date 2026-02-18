@@ -22,9 +22,8 @@ clicast -lc -e ENV_MIGRATED_C TOols Script Run ENV_MIGRATED_C.tst
 manage -p Project --import ENV_MIGRATED_C.vce -lc
 manage -p Project --group C --add ENV_MIGRATED_C
 manage -p Project --level GNU_C_49/C_SUITE --group C -e ENV_MIGRATED_C --migrate
-manage -p Project --level GNU_C_49/C_SUITE/ENV_MIGRATED_C --build --workspace=Project\build
-manage -p Project --level GNU_C_49/C_SUITE/ENV_MIGRATED_C --apply-changes --force --verbose
-manage -p Project --level GNU_C_49/C_SUITE --group C -e ENV_MIGRATED_C --clean
+manage -p Project --level GNU_C_49/C_SUITE/ENV_MIGRATED_C --build 
+manage -p Project --level GNU_C_49/C_SUITE/ENV_MIGRATED_C --apply-changes --force
 gcc -c unit.adb
 clicast -lada options COMPILATION_SYSTEM GNAT
 clicast -lada environment build ENV_MONITORED_ADA.env
@@ -42,8 +41,9 @@ manage -p Project --import ENV_COVER.vcp
 manage -p Project --group CPP --add ENV_COVER
 manage -p Project --environment ENV_COVER --apply-instrumentation=BUILD
 
-manage -p Project --status
-manage -p Project --config=VCAST_COVERAGE_SOURCE_FILE_PERSPECTIVE=FALSE
+manage -p Project --clean
+manage -p Project --status %VCAST_SHARED_DIR%
+manage -p Project --config=VCAST_COVERAGE_SOURCE_FILE_PERSPECTIVE=FALSE  
 
 if "%VCAST_DIRECTORY%"=="2020sp1" (
     copy /Y ENV_COVER_system_tests_2020sp1.py Project\python\ENV_COVER_system_tests.py
