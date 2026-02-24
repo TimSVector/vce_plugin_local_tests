@@ -33,7 +33,7 @@ class SystemTestsConfiguration(object):
 
     def __init__(self):
         currDir = os.getenv("WORKSPACE",os.getcwd())
-        currDir = currDir.split("@",1)[0]
+        #currDir = currDir.split("@",1)[0]
         working_dir = os.path.join(currDir,"Project_vcast_pipeline/working_dir")
 
         # These are the environment's variables for spawned processes

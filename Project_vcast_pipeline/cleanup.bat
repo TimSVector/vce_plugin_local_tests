@@ -2,11 +2,11 @@
 
 @echo on
 
-set WORKSPACE=%CD%\working_dir
+set WORKSPACE=%CD%
 set path=%path%;d:\vector\tools\gnat\2021\bin;%VECTORCAST_DIR%\mingw\bin;
 :: set WORKING_DIR=D:\vector\sandbox\jenkins\working_dir
-set WORKING_DIR=%CD%\working_dir
-set VCAST_VC_SCRIPTS=D:\vector\github\vectorcast-execution-plugin_079\src\main\resources\scripts
+set WORKING_DIR=%~dp0working_dir
+set VCAST_VC_SCRIPTS=D:\vector\github\vectorcast-execution-plugin_080\src\main\resources\scripts
 
 pushd %WORKING_DIR%
 
