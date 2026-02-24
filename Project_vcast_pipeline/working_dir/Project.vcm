@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="27">
+  <config>
+    <saved-logs>5</saved-logs>
+    <build-directory-naming-strategy>COMPRESSED</build-directory-naming-strategy>
+  </config>
+  <project-id>1771944240</project-id>
+  <factor-config-options>0</factor-config-options>
+  <environment name="ENV_COVER" type="COVER">
+    <language>3</language>
+    <is-monitored>1</is-monitored>
+    <config>
+      <original-environment-directory>.</original-environment-directory>
+    </config>
+  </environment>
+  <environment name="ENV_MIGRATED_C" type="UNIT">
+    <language>1</language>
+    <is-monitored>0</is-monitored>
+    <config>
+      <original-environment-directory>.</original-environment-directory>
+    </config>
+  </environment>
+  <environment name="ENV_MONITORED_ADA" type="UNIT">
+    <language>0</language>
+    <is-monitored>1</is-monitored>
+    <config>
+      <original-environment-directory>.</original-environment-directory>
+    </config>
+  </environment>
+  <group name="ADA">
+    <environment name="ENV_MONITORED_ADA"/>
+  </group>
+  <group name="C">
+    <environment name="ENV_MIGRATED_C"/>
+  </group>
+  <group name="CPP">
+    <environment name="ENV_COVER"/>
+  </group>
+  <compiler>
+    <compiler>
+      <name>GNAT</name>
+    </compiler>
+    <testsuite name="ADA_SUITE">
+      <group name="ADA"/>
+    </testsuite>
+  </compiler>
+  <compiler>
+    <compiler>
+      <name>GNU_CPP_49</name>
+    </compiler>
+    <testsuite name="CPP_SUITE">
+      <group name="CPP"/>
+    </testsuite>
+  </compiler>
+  <compiler>
+    <compiler>
+      <name>GNU_C_49</name>
+    </compiler>
+    <testsuite name="C_SUITE">
+      <group name="C"/>
+    </testsuite>
+  </compiler>
+</project>

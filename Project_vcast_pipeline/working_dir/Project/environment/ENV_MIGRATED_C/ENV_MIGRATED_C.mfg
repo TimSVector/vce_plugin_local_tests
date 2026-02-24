@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manage-config-options version="7">
+  <config>
+    <key>WHITEBOX</key>
+    <value>NO</value>
+    <key>COVERAGE_TYPE</key>
+    <value>BRANCH</value>
+  </config>
+  <search-directory type="TESTABLE_SOURCE_DIR">.</search-directory>
+</manage-config-options>
