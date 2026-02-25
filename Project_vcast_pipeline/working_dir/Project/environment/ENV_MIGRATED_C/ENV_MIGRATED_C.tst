@@ -36,3 +36,9 @@ TEST.NAME:SQUARE.001
 TEST.VALUE:unit.square.x:3
 TEST.EXPECTED:unit.square.return:9
 TEST.END
+-- Test Case: cbt_change.001 
+TEST.UNIT:unit               
+TEST.SUBPROGRAM:cbt_change   
+TEST.NEW                     
+TEST.NAME:cbt_change.001     
+TEST.END                     
