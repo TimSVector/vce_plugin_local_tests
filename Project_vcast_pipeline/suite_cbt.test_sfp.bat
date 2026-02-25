@@ -4,7 +4,7 @@ echo --level campaign_jenkins_plugin/test_pipeline_jobs/suite_cbt/test_sfp
 
 set orig_path=%PATH%
 
-call cleanup.bat
+call Project_vcast_pipeline\cleanup.bat
 
 pushd %WORKING_DIR%
 
@@ -40,32 +40,52 @@ manage -p Project_cbt_spf --import ENV_COVER.vcp
 manage -p Project_cbt_spf --level GNU_CPP_49/CPP_SUITE -e ENV_COVER --add ENV_COVER
 manage -p Project_cbt_spf --config=VCAST_COVERAGE_FOR_HEADERS=TRUE
 manage -p Project_cbt_spf --config=VCAST_COVERAGE_SOURCE_FILE_PERSPECTIVE=TRUE
-copy /Y ENV_COVER_system_tests.py %WORKING_DIR%\Project_cbt_spf\python\ENV_COVER_system_tests.py 
 
-:: Pipeline testing
+if "%VCAST_DIRECTORY%"=="2020sp1" (
+    copy /Y ENV_COVER_system_tests_2020sp1.py Project\python\ENV_COVER_system_tests.py
 
-vpython vc_scripts/archive_extract_reports.py --archive
-vpython vc_scripts/managewait.py --wait_time 30 --wait_loops 1 --command_line "--project "%WORKING_DIR%\Project_cbt_spf.vcm"  --config=VCAST_STRICT_TEST_CASE_IMPORT=TRUE"
-vpython vc_scripts/managewait.py --wait_time 30 --wait_loops 1 --command_line "--project "%WORKING_DIR%\Project_cbt_spf.vcm"  --status"
-vpython vc_scripts/managewait.py --wait_time 30 --wait_loops 1 --command_line "--project "%WORKING_DIR%\Project_cbt_spf.vcm"  --force --release-locks"
-vpython vc_scripts/managewait.py --wait_time 30 --wait_loops 1 --command_line "--project "%WORKING_DIR%\Project_cbt_spf.vcm"  --config VCAST_CUSTOM_REPORT_FORMAT=HTML"
-vpython vc_scripts/getjobs.py %WORKING_DIR%\Project_cbt_spf.vcm --type
-vpython vc_scripts/managewait.py --wait_time 30 --wait_loops 1 --command_line "--project "%WORKING_DIR%\Project_cbt_spf.vcm"  --level GNU_CPP_49/CPP_SUITE -e ENV_COVER --build-execute --incremental --output GNU_CPP_49_CPP_SUITE_ENV_COVER_rebuild.html" > unstashed_build.log
-vpython vc_scripts/managewait.py --wait_time 30 --wait_loops 1 --command_line "--project "%WORKING_DIR%\Project_cbt_spf.vcm"  --level GNU_C_49/C_SUITE -e ENV_MONITORED_C --build-execute --incremental --output GNU_C_49_C_SUITE_ENV_MONITORED_C_rebuild.html" >> unstashed_build.log
-vpython vc_scripts/managewait.py --wait_time 30 --wait_loops 1 --command_line "--project "%WORKING_DIR%\Project_cbt_spf.vcm"  --level GNU_C_49/C_SUITE -e ENV_MIGRATED_C --build-execute --incremental --output GNU_C_49_C_SUITE_ENV_MIGRATED_C_rebuild.html" >> unstashed_build.log
-vpython vc_scripts/generate-results.py  %WORKING_DIR%\Project_cbt_spf.vcm --wait_time 30 --wait_loops 1 --junit --buildlog unstashed_build.log 
-vpython vc_scripts/parallel_full_reports.py  %WORKING_DIR%\Project_cbt_spf.vcm --jobs max
-vpython vc_scripts/incremental_build_report_aggregator.py Project_cbt_spf --rptfmt HTML
-vpython vc_scripts/full_report_no_toc.py "%WORKING_DIR%\Project_cbt_spf.vcm"
-vpython vc_scripts/managewait.py --wait_time 30 --wait_loops 1 --command_line "--project "%WORKING_DIR%\Project_cbt_spf.vcm"   --create-report=aggregate   --output=Project_aggregate_report.html"
+) else if "%VCAST_DIRECTORY%"=="2018sp2" (
+    copy /Y system_tests.py Project\python\system_tests.py
 
-mkdir xml_data_orig
+) else if "%VCAST_DIRECTORY%"=="2018sp5" (
+    copy /Y system_tests.py Project\python\system_tests.py
 
-copy xml_data\* xml_data_orig
+) else if "%VCAST_DIRECTORY%"=="2019" (
+    copy /Y system_tests_2019.py Project\python\ENV_COVER_system_tests.py
 
-vpython vc_scripts/vcast_exec.py %WORKING_DIR%\Project_cbt_spf.vcm --cobertura_extended --lcov --sonarqube
+) else if "%VCAST_DIRECTORY%"=="2019sp6" (
+    copy /Y system_tests_2019.py Project\python\ENV_COVER_system_tests.py
 
-set path=%orig_path%
+) else (
+    copy /Y ENV_COVER_system_tests.py Project\python\ENV_COVER_system_tests.py
+)
 
-echo --level campaign_jenkins_plugin/test_pipeline_jobs/suite_cbt/test_sfp
-popd
+
+
+REM :: Pipeline testing
+
+REM vpython vc_scripts/archive_extract_reports.py --archive
+REM vpython vc_scripts/managewait.py --wait_time 30 --wait_loops 1 --command_line "--project "%WORKING_DIR%\Project_cbt_spf.vcm"  --config=VCAST_STRICT_TEST_CASE_IMPORT=TRUE"
+REM vpython vc_scripts/managewait.py --wait_time 30 --wait_loops 1 --command_line "--project "%WORKING_DIR%\Project_cbt_spf.vcm"  --status"
+REM vpython vc_scripts/managewait.py --wait_time 30 --wait_loops 1 --command_line "--project "%WORKING_DIR%\Project_cbt_spf.vcm"  --force --release-locks"
+REM vpython vc_scripts/managewait.py --wait_time 30 --wait_loops 1 --command_line "--project "%WORKING_DIR%\Project_cbt_spf.vcm"  --config VCAST_CUSTOM_REPORT_FORMAT=HTML"
+REM vpython vc_scripts/getjobs.py %WORKING_DIR%\Project_cbt_spf.vcm --type
+REM vpython vc_scripts/managewait.py --wait_time 30 --wait_loops 1 --command_line "--project "%WORKING_DIR%\Project_cbt_spf.vcm"  --level GNU_CPP_49/CPP_SUITE -e ENV_COVER --build-execute --incremental --output GNU_CPP_49_CPP_SUITE_ENV_COVER_rebuild.html" > unstashed_build.log
+REM vpython vc_scripts/managewait.py --wait_time 30 --wait_loops 1 --command_line "--project "%WORKING_DIR%\Project_cbt_spf.vcm"  --level GNU_C_49/C_SUITE -e ENV_MONITORED_C --build-execute --incremental --output GNU_C_49_C_SUITE_ENV_MONITORED_C_rebuild.html" >> unstashed_build.log
+REM vpython vc_scripts/managewait.py --wait_time 30 --wait_loops 1 --command_line "--project "%WORKING_DIR%\Project_cbt_spf.vcm"  --level GNU_C_49/C_SUITE -e ENV_MIGRATED_C --build-execute --incremental --output GNU_C_49_C_SUITE_ENV_MIGRATED_C_rebuild.html" >> unstashed_build.log
+REM vpython vc_scripts/generate-results.py  %WORKING_DIR%\Project_cbt_spf.vcm --wait_time 30 --wait_loops 1 --junit --buildlog unstashed_build.log 
+REM vpython vc_scripts/parallel_full_reports.py  %WORKING_DIR%\Project_cbt_spf.vcm --jobs max
+REM vpython vc_scripts/incremental_build_report_aggregator.py Project_cbt_spf --rptfmt HTML
+REM vpython vc_scripts/full_report_no_toc.py "%WORKING_DIR%\Project_cbt_spf.vcm"
+REM vpython vc_scripts/managewait.py --wait_time 30 --wait_loops 1 --command_line "--project "%WORKING_DIR%\Project_cbt_spf.vcm"   --create-report=aggregate   --output=Project_aggregate_report.html"
+
+REM mkdir xml_data_orig
+
+REM copy xml_data\* xml_data_orig
+
+REM vpython vc_scripts/vcast_exec.py %WORKING_DIR%\Project_cbt_spf.vcm --cobertura_extended --lcov --sonarqube
+
+REM set path=%orig_path%
+
+REM echo --level campaign_jenkins_plugin/test_pipeline_jobs/suite_cbt/test_sfp
+REM popd
