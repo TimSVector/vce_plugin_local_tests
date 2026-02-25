@@ -12,6 +12,7 @@ echo Starting build of building process for Project.vcm
 
 call ENV_COVER.bat
 call ENV_MONITORED_ADA.bat
+call ENV_MONITORED_C.bat
 
 if "%VCAST_DIRECTORY%"=="2020sp1" (
     copy /Y ENV_COVER_system_tests_2020sp1.py Project\python\ENV_COVER_system_tests.py

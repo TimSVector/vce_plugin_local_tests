@@ -9,16 +9,14 @@ call Project_vcast_pipeline\cleanup.bat
 pushd %WORKING_DIR%
 
 manage -p Project_cbt_spf --create
-manage -p Project_cbt_spf --level GNU_C_49/C_SUITE --create
-manage -p Project_cbt_spf --level GNU_CPP_49/CPP_SUITE --create
-clicast -lc TEMplate GNU_C_49
-clicast option VCAST_NO_LONG_DOUBLE TRUE
+manage -p Project_cbt_spf --level GNU_C_49/C_SUITE --group C --create
+manage -p Project_cbt_spf --level GNU_CPP_49/CPP_SUITE --group CPP --create
 clicast -lc TEMplate GNU_C_49
 clicast option VCAST_NO_LONG_DOUBLE TRUE
 clicast -lc environment build ENV_MONITORED_C.env
 clicast -lc -e ENV_MONITORED_C TOols Script Run ENV_MONITORED_C.tst
 manage -p Project_cbt_spf --import ENV_MONITORED_C.vce -lc
-manage -p Project_cbt_spf --level GNU_C_49/C_SUITE --add ENV_MONITORED_C
+manage -p Project_cbt_spf --level GNU_C_49/C_SUITE --group C --add ENV_MONITORED_C
 manage -p Project_cbt_spf --group ALL --list
 
 call ENV_COVER.bat

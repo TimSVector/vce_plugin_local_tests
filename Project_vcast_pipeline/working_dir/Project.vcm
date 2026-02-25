@@ -27,11 +27,19 @@
       <original-environment-directory>.</original-environment-directory>
     </config>
   </environment>
+  <environment name="ENV_MONITORED_C" type="UNIT">
+    <language>1</language>
+    <is-monitored>1</is-monitored>
+    <config>
+      <original-environment-directory>.</original-environment-directory>
+    </config>
+  </environment>
   <group name="ADA">
     <environment name="ENV_MONITORED_ADA"/>
   </group>
   <group name="C">
     <environment name="ENV_MIGRATED_C"/>
+    <environment name="ENV_MONITORED_C"/>
   </group>
   <group name="CPP">
     <environment name="ENV_COVER"/>
