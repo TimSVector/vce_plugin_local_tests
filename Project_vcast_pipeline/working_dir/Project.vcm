@@ -34,6 +34,13 @@
       <original-environment-directory>.</original-environment-directory>
     </config>
   </environment>
+  <environment name="ENV_UNIT" type="UNIT">
+    <language>2</language>
+    <is-monitored>0</is-monitored>
+    <config>
+      <original-environment-directory>.</original-environment-directory>
+    </config>
+  </environment>
   <group name="ADA">
     <environment name="ENV_MONITORED_ADA"/>
   </group>
@@ -43,6 +50,7 @@
   </group>
   <group name="CPP">
     <environment name="ENV_COVER"/>
+    <environment name="ENV_UNIT"/>
   </group>
   <compiler>
     <compiler>
