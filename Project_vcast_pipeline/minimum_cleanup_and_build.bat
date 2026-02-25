@@ -15,9 +15,7 @@ call ENV_COVER.bat
 call ENV_MONITORED_ADA.bat
 call ENV_MONITORED_C.bat
 
-cd 
-
-pause
+manage -p Project_vcast_pipeline\working_dir\Project --status
 
 if "%VCAST_DIRECTORY%"=="2020sp1" (
     copy /Y ENV_COVER_system_tests_2020sp1.py Project\python\ENV_COVER_system_tests.py
