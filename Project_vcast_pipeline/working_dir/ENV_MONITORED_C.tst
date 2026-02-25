@@ -26,16 +26,6 @@ TEST.VALUE:unit.multi.y:3
 TEST.EXPECTED:unit.multi.return:6
 TEST.END
 
--- Test Case: MULTI.001.001
-TEST.UNIT:unit
-TEST.SUBPROGRAM:multi
-TEST.NEW
-TEST.NAME:MULTI.001.001
-TEST.VALUE:unit.multi.x:2
-TEST.VALUE:unit.multi.y:3
-TEST.EXPECTED:unit.multi.return:6
-TEST.END
-
 -- Subprogram: square
 
 -- Test Case: SQUARE.001
@@ -43,15 +33,6 @@ TEST.UNIT:unit
 TEST.SUBPROGRAM:square
 TEST.NEW
 TEST.NAME:SQUARE.001
-TEST.VALUE:unit.square.x:3
-TEST.EXPECTED:unit.square.return:9
-TEST.END
-
--- Test Case: SQUARE.001.001
-TEST.UNIT:unit
-TEST.SUBPROGRAM:square
-TEST.NEW
-TEST.NAME:SQUARE.001.001
 TEST.VALUE:unit.square.x:3
 TEST.EXPECTED:unit.square.return:9
 TEST.END

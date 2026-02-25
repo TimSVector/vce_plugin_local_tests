@@ -2,6 +2,7 @@
 
 set VECTORCAST_DIR=c:\vcast\%VCAST_DIRECTORY%
 set PATH=%VECTORCAST_DIR%;d:\vector\tools\gnat\2021\bin;%VECTORCAST_DIR%\mingw\bin;%PATH%
+set WORKSPACE=%~dp0..
 
 git reset --hard
 git clean -fxd
@@ -16,9 +17,6 @@ call ENV_MONITORED_C.bat
 
 if "%VCAST_DIRECTORY%"=="2020sp1" (
     copy /Y ENV_COVER_system_tests_2020sp1.py Project\python\ENV_COVER_system_tests.py
-
-) else if "%VCAST_DIRECTORY%"=="2018sp2" (
-    copy /Y system_tests.py Project\python\system_tests.py
 
 ) else if "%VCAST_DIRECTORY%"=="2018sp5" (
     copy /Y system_tests.py Project\python\system_tests.py
