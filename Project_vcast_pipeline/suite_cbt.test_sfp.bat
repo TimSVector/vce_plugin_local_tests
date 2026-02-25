@@ -13,14 +13,6 @@ manage -p Project_cbt_spf --level GNU_C_49/C_SUITE --create
 manage -p Project_cbt_spf --level GNU_CPP_49/CPP_SUITE --create
 clicast -lc TEMplate GNU_C_49
 clicast option VCAST_NO_LONG_DOUBLE TRUE
-clicast -lc environment build ENV_MIGRATED_C.env
-clicast -lc -e ENV_MIGRATED_C TOols Script Run ENV_MIGRATED_C.tst
-manage -p Project_cbt_spf --import ENV_MIGRATED_C.vce -lc
-manage -p Project_cbt_spf --level GNU_C_49/C_SUITE --add ENV_MIGRATED_C
-manage -p Project_cbt_spf --level GNU_C_49/C_SUITE -e ENV_MIGRATED_C --migrate
-manage -p Project_cbt_spf --level GNU_C_49/C_SUITE/ENV_MIGRATED_C --build --workspace=%WORKING_DIR%\Project_cbt_spf\build
-manage -p Project_cbt_spf --level GNU_C_49/C_SUITE/ENV_MIGRATED_C --apply-changes --force --verbose
-manage -p Project_cbt_spf --level GNU_C_49/C_SUITE -e ENV_MIGRATED_C --clean
 clicast -lc TEMplate GNU_C_49
 clicast option VCAST_NO_LONG_DOUBLE TRUE
 clicast -lc environment build ENV_MONITORED_C.env
@@ -28,14 +20,9 @@ clicast -lc -e ENV_MONITORED_C TOols Script Run ENV_MONITORED_C.tst
 manage -p Project_cbt_spf --import ENV_MONITORED_C.vce -lc
 manage -p Project_cbt_spf --level GNU_C_49/C_SUITE --add ENV_MONITORED_C
 manage -p Project_cbt_spf --group ALL --list
-clicast Cover Environment Create ENV_COVER
-clicast TEMplate GNU_CPP_49
-clicast option VCAST_NO_LONG_DOUBLE TRUE
-clicast -e ENV_COVER Cover Base_dir Add ROOT %WORKING_DIR%
-clicast -e ENV_COVER Cover Base_dir ALlowlist ROOT source_a.c
-clicast -e ENV_COVER Cover Base_dir ALlowlist ROOT source_b.c
-clicast -e ENV_COVER Cover Base_dir update
-clicast -e ENV_COVER Cover Instrument STATEMENT
+
+call ENV_COVER.bat
+
 manage -p Project_cbt_spf --import ENV_COVER.vcp
 manage -p Project_cbt_spf --level GNU_CPP_49/CPP_SUITE -e ENV_COVER --add ENV_COVER
 manage -p Project_cbt_spf --config=VCAST_COVERAGE_FOR_HEADERS=TRUE
