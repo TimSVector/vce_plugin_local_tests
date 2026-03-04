@@ -36,9 +36,10 @@ class SystemTestsConfiguration(object):
         #currDir = currDir.split("@",1)[0]
         working_dir = os.path.join(currDir,"Project_vcast_pipeline/working_dir")
 
-        # These are the environment's variables for spawned processes
-        # For example: self.environmentVariables = {}
-        self.environmentVariables = {}
+        VCD = os.getenv("VECTORCAST_DIR")
+
+        # Set the environment's variables for spawned processes
+        self.environmentVariables = {'PATH': os.pathsep.join([VCD, r'MinGW/bin', os.environ['PATH']])}
 
         # This is the path to where the build or make command should be executed
         # For example: self.locationWhereWeRunMake = r'd:\vector\sandbox\jenkins\working_dir'
