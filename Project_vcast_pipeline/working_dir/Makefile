@@ -1,27 +1,32 @@
 TARGET = c_executable.exe
 LIBS = -lm
 CC = gcc
-CFLAGS = -g -Wall
+CFLAGS = -g
 
 .PHONY: default all clean
 
 default: $(TARGET)
 all: default
 
-OBJECTS = $(patsubst %.c, %_cfile.o, $(wildcard *.c))
+OBJECTS = c_cover_io.o driver.o source_a.o source_b.o
 
-ENV_COVER\c_cover_io.o: ENV_COVER\c_cover_io.c ENV_COVER\vcast_c_options.h
+c_cover_io.o: ENV_COVER/c_cover_io.c ENV_COVER/vcast_c_options.h
 	$(CC) $(CFLAGS) -IENV_COVER -c $< -o $@
 
-%_cfile.o: %.c ENV_COVER\c_cover_io.o
-	$(CC) $(CFLAGS) -I. -IENV_COVER -c $< -o $@
+driver.o: driver.c
+	$(CC) $(CFLAGS) -IENV_COVER -c $< -o $@
+
+source_a.o: source_a.c
+	$(CC) $(CFLAGS) -IENV_COVER -c $< -o $@
+
+source_b.o: source_b.c
+	$(CC) $(CFLAGS) -IENV_COVER -c $< -o $@
 
 .PRECIOUS: $(TARGET) $(OBJECTS)
 
 $(TARGET): $(OBJECTS)
-	$(CC) $(OBJECTS) ENV_COVER\c_cover_io.o -Wall $(LIBS) -o $@
+	$(CC) $(OBJECTS) -Wall $(LIBS) -o $@
 
 clean:
 	-del *.o
-	-del ENV_COVER\*.o
 	-del $(TARGET)
