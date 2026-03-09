@@ -2,7 +2,9 @@
 
 set VECTORCAST_DIR=c:\vcast\%VCAST_DIRECTORY%
 set PATH=%VECTORCAST_DIR%;d:\vector\tools\gnat\2021\bin;%VECTORCAST_DIR%\mingw\bin;%PATH%
-set WORKSPACE=%~dp0..
+for %%I in ("%~dp0..") do set WORKSPACE=%%~fI
+
+echo %WORKSPACE%
 
 git reset --hard
 git clean -fxd
