@@ -10,7 +10,7 @@ all: default
 
 OBJECTS = c_cover_io.o driver.o source_a.o source_b.o
 
-c_cover_io.o: ENV_COVER/c_cover_io.c ENV_COVER/vcast_c_options.h
+c_cover_io.o: ENV_COVER_wd/ENV_COVER/c_cover_io.c ENV_COVER_wd/ENV_COVER/vcast_c_options.h
 	$(CC) $(CFLAGS) -IENV_COVER -c $< -o $@
 
 driver.o: driver.c
