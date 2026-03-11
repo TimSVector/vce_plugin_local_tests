@@ -15,17 +15,6 @@ echo Starting build of building process for Project.vcm
 cd ENV_COVER_wd
 call ENV_COVER.bat
 
-cd ..\ENV_MONITORED_ADA_wd
-call ENV_MONITORED_ADA.bat
-
-cd ..\ENV_MONITORED_C_wd
-call ENV_MONITORED_C.bat
-
-cd ..
-
-
-manage -p Project --status
-
 set /p FIRSTTOKEN=<%VECTORCAST_DIR%\DATA\tool_version.txt
 
 if "%FIRSTTOKEN:~0,2%"=="18" (
@@ -37,6 +26,19 @@ if "%FIRSTTOKEN:~0,2%"=="18" (
 ) else (
     copy /Y ENV_COVER_system_tests.py Project\python\ENV_COVER_system_tests.py
 )
+cd ..
+
+gcc -c unit.adb
+cd ENV_MONITORED_ADA_wd
+call ENV_MONITORED_ADA.bat
+
+cd ..\ENV_MONITORED_C_wd
+call ENV_MONITORED_C.bat
+cd ..
+
+
+manage -p Project --status
+
 
 popd
 

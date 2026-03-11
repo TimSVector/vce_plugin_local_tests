@@ -1,9 +1,9 @@
--- VectorCAST 18.sp5 (03/03/19)
+-- VectorCAST 20.sp7 (04/21/21)
 -- Test Case Script
--- 
+--
 -- Environment    : ENV_MONITORED_ADA
 -- Unit(s) Under Test: UNIT
--- 
+--
 -- Script Features
 TEST.SCRIPT_FEATURE:MULTIPLE_UUT_SUPPORT
 TEST.SCRIPT_FEATURE:MIXED_CASE_NAMES
