@@ -2,19 +2,36 @@
 <cover>
  <version>1</version>
  <options>
-  <name>ENV_COVER</name>
+  <name>env_cover</name>
+  <coverage>STATEMENT</coverage>
  </options>
+ <base>
+  <name>SourceRoot</name>
+  <path>D:/vector/github/vce_plugin_local_tests/Project_vcast_pipeline/working_dir</path>
+  <wl>driver.c</wl>
+  <wl>source_a.c</wl>
+  <wl>source_b.c</wl>
+ </base>
  <source>
-  <path>source_a.c</path>
-  <coverage>STATEMENT</coverage>
+  <regressionable_path>
+   <base>SourceRoot</base>
+   <subpath>driver.c</subpath>
+  </regressionable_path>
+  <coverage>STATEMENT_BRANCH</coverage>
  </source>
  <source>
-  <path>source_b.c</path>
-  <coverage>STATEMENT</coverage>
+  <regressionable_path>
+   <base>SourceRoot</base>
+   <subpath>source_a.c</subpath>
+  </regressionable_path>
+  <coverage>STATEMENT_BRANCH</coverage>
  </source>
  <source>
-  <path>driver.c</path>
-  <coverage>STATEMENT</coverage>
+  <regressionable_path>
+   <base>SourceRoot</base>
+   <subpath>source_b.c</subpath>
+  </regressionable_path>
+  <coverage>STATEMENT_BRANCH</coverage>
  </source>
 </cover>
 

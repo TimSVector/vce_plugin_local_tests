@@ -39,7 +39,6 @@ echo options SBF_LOC_NONMEMBER_IN_NSP DECL_NAMESPACE >> commands.tmp
 echo options SBF_LOC_NONMEMBER_OUTSIDE_NSP DECL_NAMESPACE >> commands.tmp
 echo options SOURCE_EXTENSION .c >> commands.tmp
 echo options SUBSTITUTE_CODE_FOR_C_FILE FALSE >> commands.tmp
-echo options TARGET_VARIANT HOST >> commands.tmp
 echo options VCAST_ALT_WB_METHOD FALSE >> commands.tmp
 echo options VCAST_ASSEMBLY_FILE_EXTENSIONS s >> commands.tmp
 echo options VCAST_ASSIGN_WITHOUT_COPY_CTOR TRUE >> commands.tmp
@@ -94,6 +93,7 @@ echo options VCAST_PREPEND_TO_PATH_DIRS  >> commands.tmp
 echo options VCAST_PREPROCESS_PREINCLUDE $(VECTORCAST_DIR)/DATA/gnu_native/49/intrinsics.h >> commands.tmp
 echo options VCAST_REMOVE_PREPROCESSOR_COMMENTS TRUE >> commands.tmp
 echo options VCAST_STDIO FALSE >> commands.tmp
+echo options VCAST_TEST_VALUES_DICTIONARY  >> commands.tmp
 echo options VCAST_TYPEOF_OPERATOR TRUE >> commands.tmp
 echo options VCAST_USE_COMPOUND_FOR_BATCH FALSE >> commands.tmp
 echo options VCAST_USE_EDG_PREPROCESSOR FALSE >> commands.tmp
@@ -101,9 +101,13 @@ echo options VCAST_USE_STATIC_MEMORY FALSE >> commands.tmp
 echo options VCAST_USE_STD_STRING TRUE >> commands.tmp
 echo options VCAST_USE_VCPP FALSE >> commands.tmp
 echo options VCAST_VXWORKS FALSE >> commands.tmp
+echo options VCDB_CMD_VERB  >> commands.tmp
+echo options VCDB_FILENAME  >> commands.tmp
 echo options WHITEBOX YES >> commands.tmp
+echo clear_default_source_dirs  >> commands.tmp
+echo options TESTABLE_SOURCE_DIR ..\ >> commands.tmp
 echo environment build ENV_MONITORED_C.env >> commands.tmp
 echo /E:ENV_MONITORED_C tools script run ENV_MONITORED_C.tst >> commands.tmp
 echo /E:ENV_MONITORED_C execute batch >> commands.tmp
 echo /E:ENV_MONITORED_C reports custom management ENV_MONITORED_C_management_report.html >> commands.tmp
-"%VECTORCAST_DIR%\CLICAST"  /L:C tools execute commands.tmp false
+"%VECTORCAST_DIR%\CLICAST"  /L:C tools execute commands.tmp true

@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="27">
+<project version="28">
   <config>
     <saved-logs>5</saved-logs>
     <build-directory-naming-strategy>COMPRESSED</build-directory-naming-strategy>
   </config>
   <project-id>1771944240</project-id>
   <factor-config-options>0</factor-config-options>
-  <environment name="ENV_COVER" type="COVER">
+  <environment name="env_cover" type="COVER">
+    <system-test-module>env_cover_system_tests</system-test-module>
     <language>3</language>
     <is-monitored>1</is-monitored>
     <config>
-      <original-environment-directory>.</original-environment-directory>
+      <original-environment-directory>ENV_COVER_wd</original-environment-directory>
     </config>
   </environment>
   <environment name="ENV_MIGRATED_C" type="UNIT">
@@ -24,14 +25,14 @@
     <language>0</language>
     <is-monitored>1</is-monitored>
     <config>
-      <original-environment-directory>.</original-environment-directory>
+      <original-environment-directory>ENV_MONITORED_ADA_wd</original-environment-directory>
     </config>
   </environment>
   <environment name="ENV_MONITORED_C" type="UNIT">
     <language>1</language>
     <is-monitored>1</is-monitored>
     <config>
-      <original-environment-directory>.</original-environment-directory>
+      <original-environment-directory>ENV_MONITORED_C_wd</original-environment-directory>
     </config>
   </environment>
   <environment name="ENV_UNIT" type="UNIT">
@@ -49,7 +50,7 @@
     <environment name="ENV_MONITORED_C"/>
   </group>
   <group name="CPP">
-    <environment name="ENV_COVER"/>
+    <environment name="env_cover"/>
     <environment name="ENV_UNIT"/>
   </group>
   <compiler>
