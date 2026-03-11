@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="28">
+<project version="31">
   <config>
     <saved-logs>5</saved-logs>
     <build-directory-naming-strategy>COMPRESSED</build-directory-naming-strategy>
   </config>
   <project-id>1771944240</project-id>
   <factor-config-options>0</factor-config-options>
-  <environment name="env_cover" type="COVER">
+  <environment name="ENV_COVER" type="COVER">
     <system-test-module>env_cover_system_tests</system-test-module>
     <language>3</language>
     <is-monitored>1</is-monitored>
@@ -50,7 +50,7 @@
     <environment name="ENV_MONITORED_C"/>
   </group>
   <group name="CPP">
-    <environment name="env_cover"/>
+    <environment name="ENV_COVER"/>
     <environment name="ENV_UNIT"/>
   </group>
   <compiler>
