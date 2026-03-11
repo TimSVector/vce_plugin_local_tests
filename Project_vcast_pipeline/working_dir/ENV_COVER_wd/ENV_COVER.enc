@@ -2,12 +2,12 @@
 <cover>
  <version>1</version>
  <options>
-  <name>env_cover</name>
+  <name>ENV_COVER</name>
   <coverage>STATEMENT</coverage>
  </options>
  <base>
   <name>SourceRoot</name>
-  <path>D:/vector/github/vce_plugin_local_tests/Project_vcast_pipeline/working_dir</path>
+  <path>$(WORKSPACE)/Project_vcast_pipeline/working_dir</path>
   <wl>driver.c</wl>
   <wl>source_a.c</wl>
   <wl>source_b.c</wl>
