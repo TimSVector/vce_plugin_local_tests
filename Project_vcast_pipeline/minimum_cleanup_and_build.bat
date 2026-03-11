@@ -12,9 +12,17 @@ pushd Project_vcast_pipeline\working_dir
 
 echo Starting build of building process for Project.vcm
 
+cd ENV_COVER_wd
 call ENV_COVER.bat
+
+cd ..\ENV_MONITORED_ADA_wd
 call ENV_MONITORED_ADA.bat
+
+cd ..\ENV_MONITORED_C_wd
 call ENV_MONITORED_C.bat
+
+cd ..
+
 
 manage -p Project --status
 
