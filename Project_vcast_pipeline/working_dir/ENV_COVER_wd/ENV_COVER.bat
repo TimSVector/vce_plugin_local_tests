@@ -101,5 +101,5 @@ echo options VCAST_USE_STD_STRING TRUE >> commands.tmp
 echo options VCAST_USE_VCPP FALSE >> commands.tmp
 echo options VCAST_VXWORKS FALSE >> commands.tmp
 echo options WHITEBOX NO >> commands.tmp
-echo cover environment script_run D:/vector/github/vce_plugin_local_tests/Project_vcast_pipeline/working_dir\ENV_COVER.enc >> commands.tmp
+echo cover environment script_run ENV_COVER.enc >> commands.tmp
 "%VECTORCAST_DIR%\CLICAST" /L:C tools execute commands.tmp false

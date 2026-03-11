@@ -5,15 +5,15 @@
   <name>ENV_COVER</name>
  </options>
  <source>
-  <path>D:/vector/github/vce_plugin_local_tests/Project_vcast_pipeline/working_dir/source_a.c</path>
+  <path>source_a.c</path>
   <coverage>STATEMENT</coverage>
  </source>
  <source>
-  <path>D:/vector/github/vce_plugin_local_tests/Project_vcast_pipeline/working_dir/source_b.c</path>
+  <path>source_b.c</path>
   <coverage>STATEMENT</coverage>
  </source>
  <source>
-  <path>D:/vector/github/vce_plugin_local_tests/Project_vcast_pipeline/working_dir/driver.c</path>
+  <path>driver.c</path>
   <coverage>STATEMENT</coverage>
  </source>
 </cover>
