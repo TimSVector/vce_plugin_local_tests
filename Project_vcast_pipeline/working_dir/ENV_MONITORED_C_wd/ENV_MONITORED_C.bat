@@ -1,3 +1,4 @@
+@echo off
 del commands.tmp
 echo options ASSEMBLER_CMD  >> commands.tmp
 echo options COMREADER_ENABLED FALSE >> commands.tmp

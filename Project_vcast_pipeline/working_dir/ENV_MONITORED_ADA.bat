@@ -1,3 +1,4 @@
+@echo off
 del commands.tmp
 echo options COMPILATION_SYSTEM GNAT >> commands.tmp
 echo options TARGET_VARIANT HOST >> commands.tmp
