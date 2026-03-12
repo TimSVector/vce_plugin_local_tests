@@ -15,10 +15,7 @@ echo Starting build of building process for Project.vcm
 cd ENV_COVER_wd
 call ENV_COVER.bat
 
-cd ..
-
-gcc -c unit.adb
-cd ENV_MONITORED_ADA_wd
+cd ..\ENV_MONITORED_ADA_wd
 call ENV_MONITORED_ADA.bat
 
 cd ..\ENV_MONITORED_C_wd
