@@ -21,8 +21,7 @@ cd ..\ENV_MONITORED_C_wd
 call ENV_MONITORED_C.bat
 cd ..
 
-
-manage -p Project --status
+%VECTORCAST_DIR%\manage -p Project --status
 
 cd ENV_COVER_wd
 
