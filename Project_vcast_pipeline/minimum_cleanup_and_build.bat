@@ -6,10 +6,8 @@ for %%I in ("%~dp0..") do set WORKSPACE=%%~fI
 echo %WORKSPACE%
 echo %JENKINS_URL%
 
-if "%JENKINS_URL%"=="" (
-  git reset --hard
-  git clean -fxd
-)
+git reset --hard
+git clean -fxd -e vc_scripts/
 
 pushd Project_vcast_pipeline\working_dir
 
