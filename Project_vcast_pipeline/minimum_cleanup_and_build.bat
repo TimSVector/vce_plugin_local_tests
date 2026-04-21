@@ -1,4 +1,4 @@
-
+@echo on
 
 set PATH=%VECTORCAST_DIR%;d:\vector\tools\gnat\2021\bin;%VECTORCAST_DIR%\mingw\bin;%PATH%
 for %%I in ("%~dp0..") do set WORKSPACE=%%~fI
