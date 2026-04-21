@@ -10,6 +10,6 @@ setlocal
 set PATH=%PATH%;%VECTORCAST_DIR%
 WHERE clicast
 IF %ERRORLEVEL% NEQ 0 ECHO Error: clicast was not found on System PATH. Add the VectorCAST installation directory to System PATH or set the environment variable VECTORCAST_DIR to the VectorCAST installation directory. && exit /b 1
-"CLICAST"  /X:HOST /L:ADA tools execute commands.tmp true
+"%VECTORCAST_DIR%\CLICAST"  /X:HOST /L:ADA tools execute commands.tmp true
 IF %ERRORLEVEL% NEQ 0 exit /b %ERRORLEVEL%
 endlocal
