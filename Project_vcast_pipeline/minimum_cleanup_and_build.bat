@@ -4,6 +4,7 @@ set PATH=%VECTORCAST_DIR%;d:\vector\tools\gnat\2021\bin;%VECTORCAST_DIR%\mingw\b
 for %%I in ("%~dp0..") do set WORKSPACE=%%~fI
 
 echo %WORKSPACE%
+echo %JENKINS_URL%
 
 if "%JENKINS_URL%"=="" (
   git reset --hard
