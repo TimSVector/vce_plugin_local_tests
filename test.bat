@@ -13,7 +13,7 @@ set VCAST_USE_STRICT_IMPORT=TRUE
 set VCAST_USE_RGW3=FALSE
 set VCAST_USE_LOCAL_IMPORTED_RESULTS=FALSE
 set VCAST_USE_EXTERNAL_IMPORTED_RESULTS=TRUE
-set VCAST_USE_EXTERNAL_FILENAME=Project_vc25sp4_exported_results.vcr
+set VCAST_USE_EXTERNAL_FILENAME=%WORKSPACE%\Project_vcast_pipeline\working_dir\Project_vc25sp4_exported_results.vcr
 set VCAST_USE_IMPORTED_RESULTS=TRUE
 set VCAST_USE_COVERAGE_PLUGIN=TRUE
 
@@ -30,10 +30,21 @@ set VCAST_USE_CBT=--incremental
 set VCAST_RPTS_PRETTY_PRINT_HTML=FALSE
 set VCAST_NO_FILE_TRUNCATION=1
 set VCAST_RPTS_SELF_CONTAINED=FALSE
+echo ************************************************************************
+echo *** VCAST_USE_STRICT_IMPORT..............%VCAST_USE_STRICT_IMPORT%
+echo *** VCAST_USE_IMPORTED_RESULTS...........%VCAST_USE_IMPORTED_RESULTS%
+echo *** VCAST_USE_LOCAL_IMPORTED_RESULTS.....%VCAST_USE_LOCAL_IMPORTED_RESULTS%
+echo *** VCAST_USE_EXTERNAL_IMPORTED_RESULTS..%VCAST_USE_EXTERNAL_IMPORTED_RESULTS%
+echo *** VCAST_USE_EXTERNAL_FILENAME..........%VCAST_USE_EXTERNAL_FILENAME%
+echo *** VCAST_OPTION_USE_REPORTING...........%VCAST_OPTION_USE_REPORTING%
+echo *** VCAST_USE_RGW3.......................%VCAST_USE_RGW3%
+echo ************************************************************************
+echo *** Starting the build procedure
     
 :: Use strict testcase import 
+echo *** 1. VCAST_USE_STRICT_IMPORT %VCAST_USE_STRICT_IMPORT%
 if "%VCAST_USE_STRICT_IMPORT%"=="TRUE" (
-   echo "%VCAST_USE_STRICT_IMPORT%"=="TRUE"
+   echo ***    1. CHECK
    %VECTORCAST_DIR%\vpython "%WORKSPACE%\vc_scripts\managewait.py" --wait_time %VCAST_WAIT_TIME% --wait_loops %VCAST_WAIT_LOOPS% --command_line "--project %VCAST_PROJECT_NAME% --config=VCAST_STRICT_TEST_CASE_IMPORT=TRUE"
 ) 
 
@@ -43,18 +54,21 @@ if "%VCAST_USE_STRICT_IMPORT%"=="TRUE" (
 %VECTORCAST_DIR%\vpython "%WORKSPACE%\vc_scripts\managewait.py" --wait_time %VCAST_WAIT_TIME% --wait_loops %VCAST_WAIT_LOOPS% --command_line "--project %VCAST_PROJECT_NAME% --config VCAST_CUSTOM_REPORT_FORMAT=%VCAST_REPORT_FORMAT%"
 
 :: Use Imported Results
+echo *** 2. VCAST_USE_IMPORTED_RESULTS %VCAST_USE_IMPORTED_RESULTS%
 if "%VCAST_USE_IMPORTED_RESULTS%"=="TRUE" (  
-   echo "%VCAST_USE_IMPORTED_RESULTS%"=="TRUE"
+   echo ***    2. CHECK
+   echo *** 3. VCAST_USE_LOCAL_IMPORTED_RESULTS %VCAST_USE_LOCAL_IMPORTED_RESULTS%
    if "%VCAST_USE_LOCAL_IMPORTED_RESULTS%"=="TRUE" if exist "%VCAST_PROJECT_BASENAME%_results.vcr" (
-        echo "%VCAST_USE_LOCAL_IMPORTED_RESULTS%"=="TRUE"
+        echo ***    3. CHECK
         dir "%VCAST_PROJECT_BASENAME%_results.vcr" 
         %VECTORCAST_DIR%\vpython "%WORKSPACE%\vc_scripts\managewait.py" --wait_time %VCAST_WAIT_TIME% --wait_loops %VCAST_WAIT_LOOPS% --command_line "--project %VCAST_PROJECT_NAME% --import-result=""%VCAST_PROJECT_BASENAME%_results.vcr"""
         %VECTORCAST_DIR%\vpython "%WORKSPACE%\vc_scripts\managewait.py" --wait_time %VCAST_WAIT_TIME% --wait_loops %VCAST_WAIT_LOOPS% --command_line "--project %VCAST_PROJECT_NAME% --full-status""
         if exist %VCAST_PROJECT_BASENAME%_results.vcr  ( copy %VCAST_PROJECT_BASENAME%_results.vcr %VCAST_PROJECT_BASENAME%_results_orig.vcr ) 
     ) 
+    echo *** 4. VCAST_USE_EXTERNAL_IMPORTED_RESULTS %VCAST_USE_EXTERNAL_IMPORTED_RESULTS%
+    dir %VCAST_USE_EXTERNAL_FILENAME%
     if "%VCAST_USE_EXTERNAL_IMPORTED_RESULTS%"=="TRUE" if exist "%VCAST_USE_EXTERNAL_FILENAME%" ( 
-        echo "%VCAST_USE_EXTERNAL_IMPORTED_RESULTS%"=="TRUE"
-        echio External File Name  "%VCAST_USE_EXTERNAL_FILENAME%"
+        echo ***    4. CHECK
         %VECTORCAST_DIR%\vpython "%WORKSPACE%\vc_scripts\managewait.py" --wait_time %VCAST_WAIT_TIME% --wait_loops %VCAST_WAIT_LOOPS% --command_line "--project %VCAST_PROJECT_NAME% --import-result=""%VCAST_USE_EXTERNAL_FILENAME%"""
         %VECTORCAST_DIR%\vpython "%WORKSPACE%\vc_scripts\managewait.py" --wait_time %VCAST_WAIT_TIME% --wait_loops %VCAST_WAIT_LOOPS% --command_line "--project %VCAST_PROJECT_NAME% --full-status"
     ) 
@@ -73,23 +87,29 @@ echo calling %VCAST_EXECUTE_PREAMBLE_WIN% %VECTORCAST_DIR%\vpython "%WORKSPACE%\
 %VCAST_EXECUTE_PREAMBLE_WIN% %VECTORCAST_DIR%\vpython "%WORKSPACE%\vc_scripts\managewait.py" --wait_time %VCAST_WAIT_TIME% --wait_loops %VCAST_WAIT_LOOPS% --command_line "--project %VCAST_PROJECT_NAME% --build-execute %VCAST_USE_CBT% --output %VCAST_PROJECT_BASENAME%_rebuild.%VCAST_HTML_OR_TEXT%"
 copy command.log complete_build.log
 
+echo *** 5. dir %VCAST_PROJECT_BASENAME%_rebuild.%VCAST_HTML_OR_TEXT% %VCAST_PROJECT_BASENAME%_rebuild.%VCAST_HTML_OR_TEXT%_tmp
 if exist "%VCAST_PROJECT_BASENAME%_rebuild.%VCAST_HTML_OR_TEXT%" (
+    echo ***    5. CHECK
     copy %VCAST_PROJECT_BASENAME%_rebuild.%VCAST_HTML_OR_TEXT% %VCAST_PROJECT_BASENAME%_rebuild.%VCAST_HTML_OR_TEXT%_tmp
-    echo dir %VCAST_PROJECT_BASENAME%_rebuild.%VCAST_HTML_OR_TEXT% %VCAST_PROJECT_BASENAME%_rebuild.%VCAST_HTML_OR_TEXT%_tmp
     dir %VCAST_PROJECT_BASENAME%_rebuild.%VCAST_HTML_OR_TEXT% %VCAST_PROJECT_BASENAME%_rebuild.%VCAST_HTML_OR_TEXT%_tmp
 
     :: strip off the ToC, etc
     %VECTORCAST_DIR%\vpython "%WORKSPACE%\vc_scripts\fixup_reports.py" %VCAST_PROJECT_BASENAME%_rebuild.%VCAST_HTML_OR_TEXT%_tmp
 )
 
+echo *** 6. VCAST_OPTION_USE_REPORTING %VCAST_OPTION_USE_REPORTING%
 if "%VCAST_OPTION_USE_REPORTING%" == "TRUE" (
-    echo "%VCAST_OPTION_USE_REPORTING%"=="TRUE"
+    echo ***    6. CHECK
     %VECTORCAST_DIR%\vpython "%WORKSPACE%\vc_scripts\managewait.py" --wait_time %VCAST_WAIT_TIME% --wait_loops %VCAST_WAIT_LOOPS% --command_line "--project %VCAST_PROJECT_NAME% --config VCAST_CUSTOM_REPORT_FORMAT=HTML"
     %VECTORCAST_DIR%\vpython "%WORKSPACE%\vc_scripts\generate-results.py" --junit --wait_time %VCAST_WAIT_TIME% --wait_loops %VCAST_WAIT_LOOPS% %VCAST_PROJECT_NAME% %VCAST_DONT_GENERATE_EXEC_RPT% --buildlog complete_build.log
+    echo *** 7. VCAST_USE_RGW3 %VCAST_USE_RGW3%
     if "%VCAST_USE_RGW3%"=="TRUE" (
+        echo ***    7. CHECK
         %VECTORCAST_DIR%\vpython "%WORKSPACE%\vc_scripts\managewait.py" --wait_time %VCAST_WAIT_TIME% --wait_loops %VCAST_WAIT_LOOPS% --command_line "--project %VCAST_PROJECT_NAME% --clicast-args rgw export"
     ) 
+    echo *** 8. VCAST_USE_COVERAGE_PLUGIN %VCAST_USE_COVERAGE_PLUGIN%
     if "%VCAST_USE_COVERAGE_PLUGIN%"=="TRUE" ( 
+        echo ***    8. CHECK
         echo calling %VECTORCAST_DIR%\vpython "%WORKSPACE%\vc_scripts\cobertura.py" --extended %VCAST_PROJECT_NAME%
         %VECTORCAST_DIR%\vpython "%WORKSPACE%\vc_scripts\cobertura.py" --extended %VCAST_PROJECT_NAME%
     )
@@ -97,13 +117,17 @@ if "%VCAST_OPTION_USE_REPORTING%" == "TRUE" (
     %VECTORCAST_DIR%\vpython "%WORKSPACE%\vc_scripts\managewait.py" --wait_time %VCAST_WAIT_TIME% --wait_loops %VCAST_WAIT_LOOPS% --command_line "--project %VCAST_PROJECT_NAME% --create-report=aggregate --output=""%VCAST_PROJECT_BASENAME%_aggregate_report.html"""
 
     :: Use Imported Results
+    echo *** 9. VCAST_USE_IMPORTED_RESULTS %VCAST_USE_IMPORTED_RESULTS%
+    echo *** 9. VCAST_USE_LOCAL_IMPORTED_RESULTS %VCAST_USE_LOCAL_IMPORTED_RESULTS%
     if "%VCAST_USE_IMPORTED_RESULTS%"=="TRUE" if "%VCAST_USE_LOCAL_IMPORTED_RESULTS%"=="TRUE" ( 
+        echo ***    9. CHECK
         echo calling export and merge
         %VECTORCAST_DIR%\vpython "%WORKSPACE%\vc_scripts\managewait.py" --wait_time %VCAST_WAIT_TIME% --wait_loops %VCAST_WAIT_LOOPS% --command_line "--project %VCAST_PROJECT_NAME% --export-result=%VCAST_PROJECT_BASENAME%_results.vcr"
         %VECTORCAST_DIR%\vpython "%WORKSPACE%\vc_scripts\merge_vcr.py" --orig "%VCAST_PROJECT_BASENAME%_results_orig.vcr" --new %VCAST_PROJECT_BASENAME%_results.vcr
     )
 )
 
+echo *** 10. END...CHECK
 
 
 
